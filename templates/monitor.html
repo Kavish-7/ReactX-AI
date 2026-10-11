@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CHEMOVISTA AI Monitor</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            background:
+                #0b1220;
+
+            color: white;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* ================================================
+           HEADER
+           ================================================ */
+
+        header {
+
+            text-align: center;
+
+            padding:
+                25px 10px;
+
+        }
+
+
+        header h1 {
+
+            margin: 0;
+
+            font-size: 32px;
+
+        }
+
+
+        header p {
+
+            margin-top: 8px;
+
+            color: #9ca8bd;
+
+        }
+
+
+        /* ================================================
+           MAIN
+           ================================================ */
+
+        .container {
+
+            width: 92%;
+
+            max-width: 1000px;
+
+            margin:
+                10px auto 40px;
+
+        }
+
+
+        .card {
+
+            background:
+                #172033;
+
+            border-radius:
+                20px;
+
+            padding:
+                25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.3);
+
+        }
+
+
+        /* ================================================
+           STATUS
+           ================================================ */
+
+        .status {
+
+            text-align: center;
+
+            padding:
+                12px;
+
+            border-radius:
+                10px;
+
+            background:
+                #202b40;
+
+            margin-bottom:
+                20px;
+
+            font-size:
+                18px;
+
+        }
+
+
+        /* ================================================
+           IMAGE
+           ================================================ */
+
+        .image-box {
+
+            width: 100%;
+
+            min-height: 350px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                #080c14;
+
+            border-radius:
+                15px;
+
+            overflow: hidden;
+
+        }
+
+
+        #photo {
+
+            width: 100%;
+
+            max-height: 600px;
+
+            object-fit: contain;
+
+            display: none;
+
+        }
+
+
+        #waiting {
+
+            color:
+                #7f8ba3;
+
+            font-size:
+                22px;
+
+        }
+
+
+        /* ================================================
+           RESULT
+           ================================================ */
+
+        .result {
+
+            text-align:
+                center;
+
+            margin-top:
+                25px;
+
+        }
+
+
+        #plastic {
+
+            font-size:
+                46px;
+
+            font-weight:
+                bold;
+
+            margin:
+                10px;
+
+        }
+
+
+        #confidence {
+
+            font-size:
+                24px;
+
+            color:
+                #aeb9cc;
+
+        }
+
+
+        /* ================================================
+           INFO
+           ================================================ */
+
+        .info {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            gap:
+                20px;
+
+            margin-top:
+                25px;
+
+            flex-wrap:
+                wrap;
+
+        }
+
+
+        .info-box {
+
+            background:
+                #202b40;
+
+            padding:
+                15px 25px;
+
+            border-radius:
+                12px;
+
+            text-align:
+                center;
+
+            min-width:
+                180px;
+
+        }
+
+
+        .info-title {
+
+            font-size:
+                13px;
+
+            color:
+                #8995aa;
+
+        }
+
+
+        .info-value {
+
+            font-size:
+                17px;
+
+            margin-top:
+                5px;
+
+        }
+
+
+        /* ================================================
+           FOOTER
+           ================================================ */
+
+        footer {
+
+            text-align:
+                center;
+
+            color:
+                #69758b;
+
+            padding:
+                20px;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>
+        ♻️ CHEMOVISTA AI
+    </h1>
+
+    <p>
+        Real-Time Plastic Identification Monitor
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <div class="card">
+
+
+        <!-- ============================================
+             STATUS
+             ============================================= -->
+
+        <div
+            class="status"
+            id="status"
+        >
+            Waiting for ESP32...
+        </div>
+
+
+        <!-- ============================================
+             CAMERA IMAGE
+             ============================================= -->
+
+        <div class="image-box">
+
+
+            <div id="waiting">
+
+                Waiting for camera capture...
+
+            </div>
+
+
+            <img
+                id="photo"
+                src=""
+                alt="ESP32-CAM capture"
+            >
+
+
+        </div>
+
+
+        <!-- ============================================
+             AI RESULT
+             ============================================= -->
+
+        <div class="result">
+
+
+            <div id="plastic">
+                --
+            </div>
+
+
+            <div id="confidence">
+                Confidence: --
+            </div>
+
+
+        </div>
+
+
+        <!-- ============================================
+             INFORMATION
+             ============================================= -->
+
+        <div class="info">
+
+
+            <div class="info-box">
+
+                <div class="info-title">
+                    CAMERA
+                </div>
+
+                <div class="info-value">
+                    ESP32-CAM
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-title">
+                    AI MODEL
+                </div>
+
+                <div class="info-value">
+                    ResNet18
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-title">
+                    SYSTEM
+                </div>
+
+                <div
+                    class="info-value"
+                    id="system"
+                >
+                    Waiting
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<footer>
+
+    CHEMOVISTA • Smart Plastic Sorting
+
+</footer>
+
+
+<script>
+
+
+// ========================================================
+// VARIABLES
+// ========================================================
+
+let lastImage = "";
+
+
+// ========================================================
+// CHECK SERVER RESULT
+// ========================================================
+
+async function checkResult()
+{
+
+    try
+    {
+
+        const response =
+            await fetch(
+                "/latest_result?t="
+                + Date.now()
+            );
+
+
+        const data =
+            await response.json();
+
+
+        // ==================================================
+        // STATUS
+        // ==================================================
+
+        document.getElementById(
+            "status"
+        ).innerText =
+            data.status ||
+            "Waiting for ESP32...";
+
+
+        // ==================================================
+        // NEW IMAGE
+        // ==================================================
+
+        if (
+            data.image &&
+            data.image !== lastImage
+        )
+        {
+
+            lastImage =
+                data.image;
+
+
+            const photo =
+                document.getElementById(
+                    "photo"
+                );
+
+
+            const waiting =
+                document.getElementById(
+                    "waiting"
+                );
+
+
+            // ------------------------------------------------
+            // CACHE BUSTING
+            // ------------------------------------------------
+
+            photo.src =
+                data.image
+                + "?t="
+                + Date.now();
+
+
+            photo.style.display =
+                "block";
+
+
+            waiting.style.display =
+                "none";
+
+
+            // ------------------------------------------------
+            // RESULT
+            // ------------------------------------------------
+
+            if (data.plastic)
+            {
+
+                document.getElementById(
+                    "plastic"
+                ).innerText =
+                    data.plastic;
+
+
+                document.getElementById(
+                    "confidence"
+                ).innerText =
+                    "Confidence: "
+                    + data.confidence
+                    + "%";
+
+            }
+
+
+            document.getElementById(
+                "system"
+            ).innerText =
+                "AI Complete";
+
+
+            console.log(
+                "New capture:",
+                data.image
+            );
+
+            console.log(
+                "AI:",
+                data.plastic
+            );
+
+            console.log(
+                "Confidence:",
+                data.confidence
+            );
+
+        }
+
+    }
+
+
+    catch(error)
+    {
+
+        document.getElementById(
+            "status"
+        ).innerText =
+            "Cannot connect to Flask";
+
+
+        document.getElementById(
+            "system"
+        ).innerText =
+            "Offline";
+
+
+        console.log(
+            error
+        );
+
+    }
+
+}
+
+
+// ========================================================
+// CHECK EVERY 500 ms
+// ========================================================
+
+setInterval(
+    checkResult,
+    500
+);
+
+
+// ========================================================
+// FIRST CHECK
+// ========================================================
+
+checkResult();
+
+
+</script>
+
+
+</body>
+
+</html>

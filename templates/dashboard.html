@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>REACTX AI</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #080f1d;
+
+            color: white;
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        header {
+
+            text-align: center;
+
+            padding: 25px 15px 15px;
+        }
+
+
+        header h1 {
+
+            margin: 0;
+
+            font-size: 40px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+        }
+
+
+        header p {
+
+            margin-top: 8px;
+
+            color: #9aa8bd;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+           ===================================================== */
+
+        .container {
+
+            width: 92%;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           TOP STATUS
+           ===================================================== */
+
+        .top-status {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin: 20px 0;
+        }
+
+
+        .status-card {
+
+            background: #151f32;
+
+            border: 1px solid #26344d;
+
+            border-radius: 15px;
+
+            padding: 18px;
+
+            text-align: center;
+        }
+
+
+        .status-title {
+
+            color: #8795aa;
+
+            font-size: 13px;
+
+            margin-bottom: 8px;
+
+            text-transform: uppercase;
+        }
+
+
+        .status-value {
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        .online {
+
+            color: #22c55e;
+        }
+
+
+        .offline {
+
+            color: #ef4444;
+        }
+
+
+        .working {
+
+            color: #facc15;
+        }
+
+
+        /* =====================================================
+           MAIN GRID
+           ===================================================== */
+
+        .main-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        .card {
+
+            background: #151f32;
+
+            border: 1px solid #26344d;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.25);
+        }
+
+
+        .card-title {
+
+            text-align: center;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================================
+           CAMERA
+           ===================================================== */
+
+        .camera-box {
+
+            width: 100%;
+
+            height: 450px;
+
+            background: #050911;
+
+            border-radius: 15px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            border: 1px solid #2b3953;
+        }
+
+
+        #cameraImage {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            display: none;
+        }
+
+
+        #cameraWaiting {
+
+            color: #748198;
+
+            text-align: center;
+
+            font-size: 20px;
+
+            padding: 20px;
+        }
+
+
+        /* =====================================================
+           AI RESULT
+           ===================================================== */
+
+        .result-card {
+
+            text-align: center;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .ai-label {
+
+            color: #8d9ab0;
+
+            font-size: 15px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+
+        #plasticResult {
+
+            font-size: 52px;
+
+            font-weight: 800;
+
+            margin: 20px 0 10px;
+
+            color: #22c55e;
+        }
+
+
+        #confidence {
+
+            font-size: 25px;
+
+            color: #d4dbe6;
+
+            margin-bottom: 25px;
+        }
+
+
+        #resultStatus {
+
+            background: #202c42;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================================
+           VOICE BUTTON
+           ===================================================== */
+
+        .voice-button {
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 15px 20px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .voice-button:hover {
+
+            transform: scale(1.03);
+        }
+
+
+        /* =====================================================
+           BELT CONTROL
+           ===================================================== */
+
+        .belt-card {
+
+            margin-top: 20px;
+
+            text-align: center;
+        }
+
+
+        #beltStatus {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            margin: 15px 0 25px;
+        }
+
+
+        .belt-on {
+
+            color: #22c55e;
+        }
+
+
+        .belt-off {
+
+            color: #ef4444;
+        }
+
+
+        .belt-button {
+
+            border: none;
+
+            padding: 16px 35px;
+
+            margin: 7px;
+
+            border-radius: 12px;
+
+            color: white;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .belt-button:hover {
+
+            transform: scale(1.04);
+        }
+
+
+        .belt-button:active {
+
+            transform: scale(0.98);
+        }
+
+
+        .on-button {
+
+            background: #22c55e;
+        }
+
+
+        .off-button {
+
+            background: #ef4444;
+        }
+
+
+        /* =====================================================
+           SYSTEM STATUS
+           ===================================================== */
+
+        .system-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+        }
+
+
+        .system-card {
+
+            background: #151f32;
+
+            border: 1px solid #26344d;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            text-align: center;
+        }
+
+
+        .system-icon {
+
+            font-size: 28px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .system-name {
+
+            color: #8997ad;
+
+            font-size: 13px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 7px;
+        }
+
+
+        .system-state {
+
+            font-weight: bold;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           LAST MESSAGE
+           ===================================================== */
+
+        .last-detection {
+
+            margin-top: 20px;
+
+            background: #151f32;
+
+            border: 1px solid #26344d;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            text-align: center;
+        }
+
+
+        #lastDetection {
+
+            color: #aebbd0;
+
+            margin-top: 8px;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            color: #68768c;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media(max-width: 850px) {
+
+            .main-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .top-status {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .system-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .camera-box {
+
+                height: 350px;
+            }
+
+        }
+
+
+        @media(max-width: 500px) {
+
+            header h1 {
+
+                font-size: 30px;
+            }
+
+
+            #plasticResult {
+
+                font-size: 40px;
+            }
+
+
+            .system-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<header>
+
+    <h1>♻️ REACTX AI</h1>
+
+    <p>
+        AI-Based Smart Plastic Identification & Sorting System
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- =====================================================
+         TOP STATUS
+         ===================================================== -->
+
+    <div class="top-status">
+
+
+        <div class="status-card">
+
+            <div class="status-title">
+                ESP32-CAM
+            </div>
+
+            <div
+                id="cameraStatus"
+                class="status-value online"
+            >
+                ● ONLINE
+            </div>
+
+        </div>
+
+
+        <div class="status-card">
+
+            <div class="status-title">
+                AI MODEL
+            </div>
+
+            <div
+                id="aiStatus"
+                class="status-value online"
+            >
+                ● READY
+            </div>
+
+        </div>
+
+
+        <div class="status-card">
+
+            <div class="status-title">
+                SYSTEM
+            </div>
+
+            <div
+                id="systemStatus"
+                class="status-value"
+            >
+                WAITING
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CAMERA + AI RESULT
+         ===================================================== -->
+
+    <div class="main-grid">
+
+
+        <!-- CAMERA -->
+
+        <div class="card">
+
+            <div class="card-title">
+
+                📷 LATEST CAMERA CAPTURE
+
+            </div>
+
+
+            <div class="camera-box">
+
+
+                <div id="cameraWaiting">
+
+                    Waiting for plastic object...
+
+                </div>
+
+
+                <img
+                    id="cameraImage"
+                    alt="ESP32-CAM captured plastic"
+                >
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- AI RESULT -->
+
+        <div class="card result-card">
+
+
+            <div class="ai-label">
+
+                AI DETECTION
+
+            </div>
+
+
+            <div id="plasticResult">
+
+                WAITING
+
+            </div>
+
+
+            <div id="confidence">
+
+                Confidence: --
+
+            </div>
+
+
+            <div
+                id="resultStatus"
+            >
+
+                Waiting for object detection...
+
+            </div>
+
+
+            <!-- VOICE -->
+
+            <button
+                class="voice-button"
+                onclick="repeatVoice()"
+            >
+
+                🔊 REPEAT AI RESULT
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         BELT CONTROL
+         ===================================================== -->
+
+    <div class="card belt-card">
+
+
+        <div class="card-title">
+
+            ⚙️ CONVEYOR BELT CONTROL
+
+        </div>
+
+
+        <div
+            id="beltStatus"
+            class="belt-off"
+        >
+
+            BELT OFF
+
+        </div>
+
+
+        <button
+            class="belt-button on-button"
+            onclick="beltControl('on')"
+        >
+
+            ▶ BELT ON
+
+        </button>
+
+
+        <button
+            class="belt-button off-button"
+            onclick="beltControl('off')"
+        >
+
+            ■ BELT OFF
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SYSTEM STATUS
+         ===================================================== -->
+
+    <div class="system-grid">
+
+
+        <!-- IR -->
+
+        <div class="system-card">
+
+            <div class="system-icon">
+                🔴
+            </div>
+
+            <div class="system-name">
+                IR SENSOR
+            </div>
+
+            <div
+                id="irStatus"
+                class="system-state"
+            >
+
+                WAITING
+
+            </div>
+
+        </div>
+
+
+        <!-- CAMERA -->
+
+        <div class="system-card">
+
+            <div class="system-icon">
+                📷
+            </div>
+
+            <div class="system-name">
+                ESP32-CAM
+            </div>
+
+            <div
+                id="camState"
+                class="system-state online"
+            >
+
+                ONLINE
+
+            </div>
+
+        </div>
+
+
+        <!-- CONVEYOR -->
+
+        <div class="system-card">
+
+            <div class="system-icon">
+                ⚙️
+            </div>
+
+            <div class="system-name">
+                CONVEYOR
+            </div>
+
+            <div
+                id="conveyorStatus"
+                class="system-state belt-off"
+            >
+
+                OFF
+
+            </div>
+
+        </div>
+
+
+        <!-- AI -->
+
+        <div class="system-card">
+
+            <div class="system-icon">
+                🧠
+            </div>
+
+            <div class="system-name">
+                RESNET18 AI
+            </div>
+
+            <div
+                id="modelStatus"
+                class="system-state online"
+            >
+
+                READY
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         LAST MESSAGE
+         ===================================================== -->
+
+    <div class="last-detection">
+
+        <strong>
+            Latest System Message
+        </strong>
+
+
+        <div id="lastDetection">
+
+            Waiting for ReactX AI...
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer>
+
+    REACTX AI • Smart Plastic Sorting System
+
+</footer>
+
+
+
+<script>
+
+
+// ============================================================
+// GLOBAL VARIABLES
+// ============================================================
+
+let lastImage = "";
+
+let lastPlastic = "";
+
+let lastConfidence = 0;
+
+let beltState = "OFF";
+
+
+// ============================================================
+// VOICE
+// ============================================================
+
+function speakResult(
+    plastic,
+    confidence
+)
+{
+
+    if (
+        !("speechSynthesis" in window)
+    )
+    {
+
+        console.log(
+            "Speech synthesis not supported."
+        );
+
+        return;
+
+    }
+
+
+    // Stop previous speech
+
+    window.speechSynthesis.cancel();
+
+
+    const message =
+
+        "Plastic detected. "
+
+        + plastic
+
+        + ". Confidence "
+
+        + Number(
+            confidence
+        ).toFixed(0)
+
+        + " percent.";
+
+
+    const speech =
+
+        new SpeechSynthesisUtterance(
+            message
+        );
+
+
+    speech.rate = 0.9;
+
+    speech.pitch = 1.0;
+
+    speech.volume = 1.0;
+
+
+    window.speechSynthesis.speak(
+        speech
+    );
+
+}
+
+
+// ============================================================
+// REPEAT VOICE
+// ============================================================
+
+function repeatVoice()
+{
+
+    if (
+        lastPlastic !== ""
+    )
+    {
+
+        speakResult(
+
+            lastPlastic,
+
+            lastConfidence
+
+        );
+
+    }
+
+    else
+    {
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                "Waiting for plastic detection."
+            );
+
+
+        window.speechSynthesis.speak(
+            speech
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// BELT ON / OFF
+// ============================================================
+
+async function beltControl(
+    action
+)
+{
+
+    try
+    {
+
+        const response =
+
+            await fetch(
+
+                "/belt_control?action="
+                + action
+
+            );
+
+
+        const data =
+
+            await response.json();
+
+
+        console.log(
+            "Belt response:",
+            data
+        );
+
+
+        if (
+            data.success
+        )
+        {
+
+            beltState =
+                action.toUpperCase();
+
+
+            const beltStatus =
+
+                document.getElementById(
+                    "beltStatus"
+                );
+
+
+            const conveyorStatus =
+
+                document.getElementById(
+                    "conveyorStatus"
+                );
+
+
+            if (
+                action === "on"
+            )
+            {
+
+                beltStatus.innerText =
+                    "BELT ON";
+
+
+                beltStatus.className =
+                    "belt-on";
+
+
+                conveyorStatus.innerText =
+                    "● ON";
+
+
+                conveyorStatus.className =
+                    "system-state belt-on";
+
+            }
+
+
+            else
+            {
+
+                beltStatus.innerText =
+                    "BELT OFF";
+
+
+                beltStatus.className =
+                    "belt-off";
+
+
+                conveyorStatus.innerText =
+                    "● OFF";
+
+
+                conveyorStatus.className =
+                    "system-state belt-off";
+
+            }
+
+
+            document.getElementById(
+                "lastDetection"
+            ).innerText =
+
+                "Conveyor belt "
+                + action.toUpperCase()
+                + ".";
+
+        }
+
+
+        else
+        {
+
+            alert(
+                "Belt control failed:\n"
+                + (
+                    data.error
+                    || "Unknown error"
+                )
+            );
+
+        }
+
+    }
+
+
+    catch(error)
+    {
+
+        console.error(
+            "Belt control error:",
+            error
+        );
+
+
+        alert(
+            "Cannot connect to ESP32 Dev Module."
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// UPDATE SYSTEM STATUS
+// ============================================================
+
+function updateStatus(
+    data
+)
+{
+
+    const status =
+        data.status || "";
+
+
+    document.getElementById(
+        "lastDetection"
+    ).innerText =
+        status;
+
+
+    const lowerStatus =
+        status.toLowerCase();
+
+
+    // --------------------------------------------------------
+    // CAPTURING
+    // --------------------------------------------------------
+
+    if (
+        lowerStatus.includes(
+            "captur"
+        )
+    )
+    {
+
+        document.getElementById(
+            "systemStatus"
+        ).innerText =
+            "CAPTURING";
+
+
+        document.getElementById(
+            "aiStatus"
+        ).innerText =
+            "WAITING";
+
+
+        document.getElementById(
+            "aiStatus"
+        ).className =
+            "status-value working";
+
+
+        document.getElementById(
+            "irStatus"
+        ).innerText =
+            "OBJECT DETECTED";
+
+    }
+
+
+    // --------------------------------------------------------
+    // ANALYZING
+    // --------------------------------------------------------
+
+    else if (
+        lowerStatus.includes(
+            "analyz"
+        )
+    )
+    {
+
+        document.getElementById(
+            "systemStatus"
+        ).innerText =
+            "AI ANALYZING";
+
+
+        document.getElementById(
+            "aiStatus"
+        ).innerText =
+            "PROCESSING";
+
+
+        document.getElementById(
+            "aiStatus"
+        ).className =
+            "status-value working";
+
+
+        document.getElementById(
+            "modelStatus"
+        ).innerText =
+            "PROCESSING";
+
+
+        document.getElementById(
+            "modelStatus"
+        ).className =
+            "system-state working";
+
+    }
+
+
+    // --------------------------------------------------------
+    // COMPLETE
+    // --------------------------------------------------------
+
+    else if (
+        lowerStatus.includes(
+            "complete"
+        )
+    )
+    {
+
+        document.getElementById(
+            "systemStatus"
+        ).innerText =
+            "COMPLETE";
+
+
+        document.getElementById(
+            "aiStatus"
+        ).innerText =
+            "READY";
+
+
+        document.getElementById(
+            "aiStatus"
+        ).className =
+            "status-value online";
+
+
+        document.getElementById(
+            "modelStatus"
+        ).innerText =
+            "READY";
+
+
+        document.getElementById(
+            "modelStatus"
+        ).className =
+            "system-state online";
+
+    }
+
+}
+
+
+// ============================================================
+// CHECK LATEST AI RESULT
+// ============================================================
+
+async function checkResult()
+{
+
+    try
+    {
+
+        const response =
+
+            await fetch(
+
+                "/latest_result?t="
+                + Date.now()
+
+            );
+
+
+        if (
+            !response.ok
+        )
+        {
+
+            throw new Error(
+                "Server error"
+            );
+
+        }
+
+
+        const data =
+
+            await response.json();
+
+
+        // ----------------------------------------------------
+        // UPDATE STATUS
+        // ----------------------------------------------------
+
+        updateStatus(
+            data
+        );
+
+
+        // ----------------------------------------------------
+        // NEW IMAGE
+        // ----------------------------------------------------
+
+        if (
+            data.image
+            &&
+            data.image !== lastImage
+        )
+        {
+
+            lastImage =
+                data.image;
+
+
+            const image =
+
+                document.getElementById(
+                    "cameraImage"
+                );
+
+
+            const waiting =
+
+                document.getElementById(
+                    "cameraWaiting"
+                );
+
+
+            image.src =
+
+                data.image
+                + "?t="
+                + Date.now();
+
+
+            image.style.display =
+                "block";
+
+
+            waiting.style.display =
+                "none";
+
+
+            document.getElementById(
+                "cameraStatus"
+            ).innerText =
+                "● ONLINE";
+
+
+            document.getElementById(
+                "cameraStatus"
+            ).className =
+                "status-value online";
+
+        }
+
+
+        // ----------------------------------------------------
+        // AI RESULT
+        // ----------------------------------------------------
+
+        if (
+            data.success
+            &&
+            data.plastic
+        )
+        {
+
+            const newPlastic =
+                data.plastic;
+
+
+            const newConfidence =
+                Number(
+                    data.confidence
+                );
+
+
+            document.getElementById(
+                "plasticResult"
+            ).innerText =
+                newPlastic;
+
+
+            document.getElementById(
+                "confidence"
+            ).innerText =
+
+                "Confidence: "
+                + newConfidence.toFixed(2)
+                + "%";
+
+
+            document.getElementById(
+                "resultStatus"
+            ).innerText =
+                "✓ AI analysis complete";
+
+
+            document.getElementById(
+                "resultStatus"
+            ).style.color =
+                "#22c55e";
+
+
+            // ------------------------------------------------
+            // SPEAK ONLY FOR NEW RESULT
+            // ------------------------------------------------
+
+            if (
+                newPlastic !== lastPlastic
+                ||
+                newConfidence !== lastConfidence
+            )
+            {
+
+                lastPlastic =
+                    newPlastic;
+
+
+                lastConfidence =
+                    newConfidence;
+
+
+                speakResult(
+
+                    newPlastic,
+
+                    newConfidence
+
+                );
+
+            }
+
+        }
+
+    }
+
+
+    catch(error)
+    {
+
+        console.log(
+            "ReactX AI connection error:",
+            error
+        );
+
+
+        document.getElementById(
+            "cameraStatus"
+        ).innerText =
+            "● OFFLINE";
+
+
+        document.getElementById(
+            "cameraStatus"
+        ).className =
+            "status-value offline";
+
+
+        document.getElementById(
+            "systemStatus"
+        ).innerText =
+            "SERVER OFFLINE";
+
+    }
+
+}
+
+
+// ============================================================
+// CHECK EVERY 500ms
+// ============================================================
+
+setInterval(
+    checkResult,
+    500
+);
+
+
+// ============================================================
+// FIRST CHECK
+// ============================================================
+
+checkResult();
+
+
+</script>
+
+
+</body>
+
+</html>
