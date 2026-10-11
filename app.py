@@ -37,7 +37,7 @@ os.makedirs(
 # ============================================================
 
 # ESP32-CAM
-ESP32_CAM_IP = "192.168.9.182"
+ESP32_CAM_IP = "" #CAM IP
 
 CAMERA_URL = (
     f"http://{ESP32_CAM_IP}/image"
@@ -45,7 +45,7 @@ CAMERA_URL = (
 
 
 # ESP32 DEV MODULE
-ESP32_DEV_IP = "192.168.9.158"
+ESP32_DEV_IP = "" #ESP32 IP
 
 
 # ============================================================
